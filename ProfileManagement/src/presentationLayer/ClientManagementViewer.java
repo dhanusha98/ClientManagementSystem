@@ -64,16 +64,10 @@ public class ClientManagementViewer {
 		System.out.println("CUSTOMER ID: ");
 		int customerID=sc.nextInt();
 		
-		if(String.valueOf(customerID).isEmpty())
-		{	
-			System.out.println("CUSTOMER ID IS EMPTY !");
-			
-		} else {	
-            custObj.setCustomerID(customerID);
-			
-			int custID=custObj.getCustomerID();
-			clientDAObj.searchProfile(custID);
-		}
+		custObj.setCustomerID(customerID);
+		
+		int custID=custObj.getCustomerID();
+		clientDAObj.searchProfile(custID);
 		
 	}
 	
@@ -94,32 +88,25 @@ public class ClientManagementViewer {
 		System.out.println("OTHER DETAILS: ");
 		String otherDetails=sc.nextLine();
 		
-		if(customerFullName.isEmpty() || username.isEmpty() || password.isEmpty() || otherDetails.isEmpty())
+		custObj.setCustomerFullName(customerFullName);
+		custObj.setUsername(username);
+		custObj.setPassword(password);
+		custObj.setOtherDetails(otherDetails);
+		
+		String custFullName=custObj.getCustomerFullName();
+		String user=custObj.getUsername();
+		String psw=custObj.getPassword();
+		String details=custObj.getOtherDetails();
+		
+		boolean result = clientDAObj.insertProfile(custFullName, user, psw, details);
+		
+		if(result == true)
 		{
-			System.out.println("REQUIRED FIELDS ARE EMPTY !");
+			System.out.println("PROFILE CREATED SUCCESSFULLY !");
 		} else {
 			
-			custObj.setCustomerFullName(customerFullName);
-			custObj.setUsername(username);
-			custObj.setPassword(password);
-			custObj.setOtherDetails(otherDetails);
-			
-			String custFullName=custObj.getCustomerFullName();
-			String user=custObj.getUsername();
-			String psw=custObj.getPassword();
-			String details=custObj.getOtherDetails();
-			
-			boolean result = clientDAObj.insertProfile(custFullName, user, psw, details);
-			
-			if(result == true)
-			{
-				System.out.println("PROFILE CREATED SUCCESSFULLY !");
-			} else {
-				
-				System.out.println("PROFILE CREATION FAILED !");
-			}
+			System.out.println("PROFILE CREATION FAILED !");
 		}
-		
 	}
 	
 	public void updateProfile()
@@ -143,35 +130,26 @@ public class ClientManagementViewer {
 		System.out.println("OTHER DETAILS: ");
 		String otherDetails=sc.nextLine();
 		
-		if(String.valueOf(customerID).isEmpty() || customerFullName.isEmpty() || 
-		   username.isEmpty() || password.isEmpty() || otherDetails.isEmpty())
+		custObj.setCustomerID(customerID);
+		custObj.setCustomerFullName(customerFullName);
+		custObj.setUsername(username);
+		custObj.setPassword(password);
+		custObj.setOtherDetails(otherDetails);
+		
+		int custID=custObj.getCustomerID();
+		String custFullName=custObj.getCustomerFullName();
+		String user=custObj.getUsername();
+		String psw=custObj.getPassword();
+		String details=custObj.getOtherDetails();
+
+		boolean result = clientDAObj.updateProfile(custID, custFullName, user, psw, details);
+		
+		if(result == true)
 		{
-			
-			System.out.println("REQUIRED FIELDS ARE EMPTY !");
-			
+			System.out.println("PROFILE UPDATED SUCCESSFULLY !");
 		} else {
 			
-			custObj.setCustomerID(customerID);
-			custObj.setCustomerFullName(customerFullName);
-			custObj.setUsername(username);
-			custObj.setPassword(password);
-			custObj.setOtherDetails(otherDetails);
-			
-			int custID=custObj.getCustomerID();
-			String custFullName=custObj.getCustomerFullName();
-			String user=custObj.getUsername();
-			String psw=custObj.getPassword();
-			String details=custObj.getOtherDetails();
-
-			boolean result = clientDAObj.updateProfile(custID, custFullName, user, psw, details);
-			
-			if(result == true)
-			{
-				System.out.println("PROFILE UPDATED SUCCESSFULLY !");
-			} else {
-				
-				System.out.println("PROFILE UPDATION FAILED !");
-			}
+			System.out.println("PROFILE UPDATION FAILED !");
 		}
 	}
 	
@@ -183,25 +161,15 @@ public class ClientManagementViewer {
 		System.out.println("CUSTOMER ID: ");
 		int customerID=sc.nextInt();
 		
-		if(String.valueOf(customerID).isEmpty())
+		custObj.setCustomerID(customerID);
+		int custID=custObj.getCustomerID();
+		boolean result = clientDAObj.deleteProfile(custID);
+		
+		if(result == true)
 		{
-			System.out.println("REQUIRED FIELDS ARE EMPTY !");
-			
+			System.out.println("PROFILE DELETED SUCCESSFULLY !");
 		} else {
-			
-			custObj.setCustomerID(customerID);
-			
-			int custID=custObj.getCustomerID();
-			
-			boolean result = clientDAObj.deleteProfile(custID);
-			
-			if(result == true)
-			{
-				System.out.println("PROFILE DELETED SUCCESSFULLY !");
-			} else {
-				
-				System.out.println("PROFILE DELETION FAILED !");
-			}
+			System.out.println("PROFILE DELETION FAILED !");
 		}
 		
 	}

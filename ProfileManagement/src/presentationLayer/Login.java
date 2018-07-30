@@ -15,7 +15,6 @@ public class Login {
 		
 		if(username.isEmpty() || password.isEmpty())
 		{
-			
 			System.out.println("USERNAME OR PASSWORD IS EMPTY !");
 			
 		} else {
@@ -27,9 +26,7 @@ public class Login {
 			String pass=admObj.getPassword();
 			
 			boolean result = adminDAObj.userValidation(user, pass);
-			
-			String resultStatus;
-			
+						
 			if(result == true)
 			{
 				mainMenuObj.displayServiceOverview();

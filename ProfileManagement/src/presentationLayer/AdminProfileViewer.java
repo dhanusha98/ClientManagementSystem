@@ -57,19 +57,14 @@ public class AdminProfileViewer {
 		System.out.println("ENTER PASSWORD: ");
 		String password=sc.nextLine();
 		
-		if(username.isEmpty() || password.isEmpty())
-		{
-			System.out.println("USERNAME OR PASSWORD IS EMPTY !");
-		} else {
-			
-			admObj.setUsername(username);
-			admObj.setPassword(password);
-			
-			String user=admObj.getUsername();
-			String pass=admObj.getPassword();
-			
-			admDAObj.viewProfile(user, pass);
-		}
+		admObj.setUsername(username);
+		admObj.setPassword(password);
+		
+		String user=admObj.getUsername();
+		String pass=admObj.getPassword();
+		
+		admDAObj.viewProfile(user, pass);
+	
 	}
 	
 	public void updateProfileDetails()
@@ -93,35 +88,26 @@ public class AdminProfileViewer {
 		System.out.println("ENTER OTHER DETAILS: ");
 		String otherDetails=sc.nextLine();
 		
-		if(String.valueOf(adminID).isEmpty() || adminName.isEmpty() || username.isEmpty() 
-		   || password.isEmpty() || otherDetails.isEmpty())
+		admObj.setAdminID(adminID);
+		admObj.setAdminName(adminName);
+		admObj.setUsername(username);
+		admObj.setPassword(password);
+		admObj.setOtherDetails(otherDetails);
+		
+		int admID=admObj.getAdminID();
+		String admName=admObj.getAdminName();
+		String userName=admObj.getUsername();
+		String pwd=admObj.getPassword();
+		String details=admObj.getOtherDetails();
+		
+		boolean result = admDAObj.updateProfile(admID, admName, userName, pwd, details);
+		
+		if(result == true)
 		{
-			
-			System.out.println("MANDATORY FIELDS ARE EMPTY !");
-			
+			System.out.println("PROFILE UPDATED SUCCESSFULLY !");
 		} else {
 			
-			admObj.setAdminID(adminID);
-			admObj.setAdminName(adminName);
-			admObj.setUsername(username);
-			admObj.setPassword(password);
-			admObj.setOtherDetails(otherDetails);
-			
-			int admID=admObj.getAdminID();
-			String admName=admObj.getAdminName();
-			String userName=admObj.getUsername();
-			String pwd=admObj.getPassword();
-			String details=admObj.getOtherDetails();
-			
-			boolean result = admDAObj.updateProfile(admID, admName, userName, pwd, details);
-			
-			if(result == true)
-			{
-				System.out.println("PROFILE UPDATED SUCCESSFULLY !");
-			} else {
-				
-				System.out.println("PROFILE UPDATION FAILED !");
-			}
+			System.out.println("PROFILE UPDATION FAILED !");
 		}
 		
 	}
